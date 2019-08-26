@@ -1,4 +1,4 @@
-const TOKEN = "NjA0NzIzODkxNTAzNjI4MzI4.XWOutg.23_-GBZ3eJX-14jBdUNddSsx8FU";
+const TOKEN = "NjA0NzIzODkxNTAzNjI4MzI4.XWOvrQ.AxpyiDu8rqI9eA6opvVks90awcM";
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const { prefix, channel } = require('./config/bot');
