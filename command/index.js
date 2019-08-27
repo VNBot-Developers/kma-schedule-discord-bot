@@ -3,6 +3,7 @@ const { prefix } = require("../config/bot");
 const commandFile = new Object({
     'ping': 'ping',
     'help': 'help',
+    'reload': 'reload',
 })
 const commands = new Object();
 Object.keys(commandFile).forEach(function (key) {
@@ -19,6 +20,7 @@ module.exports = function (client) {
         console.log("Command: " + command);
         console.log("Arguments: " + args);
         if (!commands.hasOwnProperty(command)) return;
-        commands[command].run(client, message, args, commandFile);
+        if (command === "reload") return commands[command].run(client, message, args, commandFile, commands);
+        return commands[command].run(client, message, args);
     }
 };
