@@ -4,6 +4,7 @@ const commandFile = new Object({
     'ping': 'ping',
     'help': 'help',
     'reload': 'reload',
+    'play': 'music/play',
 })
 const commands = new Object();
 Object.keys(commandFile).forEach(function (key) {
