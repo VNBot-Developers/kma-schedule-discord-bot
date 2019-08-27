@@ -6,7 +6,11 @@ const { prefix, channel } = require('./config/bot');
 const processCommand = require("./command")(client);
 client.on('ready', () => {
     log.info('login', `Ready!`);
-    client.user.setActivity(`${client.channels.size} channels `, { type: "WATCHING" });
+    const activities = ['Triết học Mác Lê Nin', 'Toán cao cấp A1', 'Toán cao cấp A3', 'Tư tưởng Hồ Chí Minh'];
+    setInterval(function () {
+        const activitiy = activities[Math.floor(Math.random() * activities.length)];
+        client.user.setActivity(activitiy, { type: "WATCHING"});
+    }, 10000)
     // const generalChannel = client.channels.get(channel.general);
     // generalChannel.send("Schedule bot ready!");
 
