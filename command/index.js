@@ -1,11 +1,12 @@
 const helpCommand = require("./help")
 const { prefix } = require("../config/bot");
-const commands = new Object({
+const commandFile = new Object({
     'ping': 'ping',
     'help': 'help',
 })
-Object.keys(commands).forEach(function (key) {
-    const path = `./${commands[key]}.js`;
+const commands = new Object();
+Object.keys(commandFile).forEach(function (key) {
+    const path = `./${commandFile[key]}.js`;
     commands[key] = require(path);
 })
 module.exports = function (client) {
@@ -17,7 +18,7 @@ module.exports = function (client) {
 
         console.log("Command: " + command);
         console.log("Arguments: " + args);
-        if(!commands.hasOwnProperty(command)) return;
-        commands[command].run(client, message, args);
+        if (!commands.hasOwnProperty(command)) return;
+        commands[command].run(client, message, args, commandFile);
     }
 };
