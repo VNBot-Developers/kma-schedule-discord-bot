@@ -1,18 +1,23 @@
 const helpCommand = require("./help")
-function processCommand(receivedMessage) {
-    let fullCommand = receivedMessage.content.substr(1) // Remove the leading exclamation mark
-    let splitCommand = fullCommand.split(" ") // Split the message up in to pieces for each space
-    let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
-    let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
+const { prefix } = require("../config/bot");
+const commands = new Object({
+    'ping': 'ping',
+    'help': 'help',
+})
+Object.keys(commands).forEach(function (key) {
+    const path = `./${commands[key]}.js`;
+    commands[key] = require(path);
+})
+module.exports = function (client) {
+    return function (message) {
+        const fullCommand = message.content.substr(prefix.length) // Remove the leading exclamation mark
+        const splitCommand = fullCommand.split(/\s+/) // Split the message up in to pieces for each space
+        const command = splitCommand[0].toLowerCase(); // The first word directly after the exclamation is the command
+        const args = splitCommand.slice(1); // All other words are arguments/parameters/options for the command
 
-    console.log("Command: " + primaryCommand)
-    console.log("Arguments: " + arguments)
-
-    if (primaryCommand == "help") {
-        return helpCommand(arguments, receivedMessage)
+        console.log("Command: " + command);
+        console.log("Arguments: " + args);
+        if(!commands.hasOwnProperty(command)) return;
+        commands[command].run(client, message, args);
     }
-    receivedMessage.channel.send("I don't understand the command. Try `!help` or `!multiply`")
-
-}
-
-module.exports = processCommand;
+};

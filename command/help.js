@@ -1,8 +1,7 @@
-function helpCommand(arguments, receivedMessage) {
-    if (arguments.length > 0) {
-        receivedMessage.channel.send("It looks like you might need help with " + arguments)
+exports.run = function (client, message, args) {
+    if (args.length > 0) {
+        message.channel.send("It looks like you might need help with " + args);
     } else {
-        receivedMessage.channel.send("I'm not sure what you need help with. Try `!help [topic]`")
+        message.channel.send("Đang cập nhật");
     }
 }
-module.exports = helpCommand;

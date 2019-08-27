@@ -1,5 +1,5 @@
 module.exports = {
-    prefix : "",
+    prefix : "!",
     name: "Schedule Bot",
     channel: {
         general: "604721235959611406",
