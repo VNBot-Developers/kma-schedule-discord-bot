@@ -14,7 +14,7 @@ module.exports = function(client, eventQueue) {
         if (!commands.hasOwnProperty(cmd)) return message.channel.send("Lệnh không hỗ trợ");
         const command = commands[cmd];
         switch (cmd) {
-            case "help": return command.run(client, message, args, commands);
+            case "help": return command.run(client, message, args, commands, prefix);
             case "reload": return command.run(client, message, args, alias, commands);
             case "login": return command.run(client, message, args, eventQueue);
             default: return command.run(client, message, args);
