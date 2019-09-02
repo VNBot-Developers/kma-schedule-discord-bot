@@ -7,8 +7,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     userOnly: false,
-    aliases: ['cs'],
-    permLevel: 0
+    aliases: ['rl'],
+    permLevel: 3
 };
 exports.help = {
     name: "reload",

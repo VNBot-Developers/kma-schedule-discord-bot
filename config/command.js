@@ -20,6 +20,10 @@ const commands = [{
     name: 'login',
     path: 'schedule/login'
 },
+{
+    name: 'test',
+    path: 'test'
+},
 ];
 module.exports = function(client) {
 

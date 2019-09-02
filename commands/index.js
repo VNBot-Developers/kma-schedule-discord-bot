@@ -10,6 +10,7 @@ module.exports = function(client) {
         if (!client.commands.has(cmd)) return message.channel.send("Lệnh không hỗ trợ");
         const command = client.commands.get(cmd);
         try {
+            if(client.elevation(message) < command.conf.permLevel) return message.channel.send("Bạn không đủ quyền để thực hiện thao tác này")
             return command.run(client, message, args);
         }
         catch (e) {

@@ -34,7 +34,7 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     userOnly: false,
-    aliases: ['cs'],
+    aliases: ['h'],
     permLevel: 0
 };
 
