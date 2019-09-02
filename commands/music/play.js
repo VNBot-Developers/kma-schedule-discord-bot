@@ -1,6 +1,6 @@
 const YTDL = require("ytdl-core");
 
-exports.run = async function (client, message, args) {
+exports.run = async function(client, message, args) {
 
     if (!message.member.voiceChannel) return message.channel.send("Vui lòng kết nối với một kênh âm thanh.");
 
@@ -15,8 +15,28 @@ exports.run = async function (client, message, args) {
     const info = await YTDL.getInfo(args[0]);
 
     const connection = await message.member.voiceChannel.join();
-    
-    const dispatcher = await connection.playStream(YTDL(args[0], { filter: "audioonly" }))
 
+    const dispatcher = connection.playStream(YTDL(args[0], { filter: "audioonly" }))
+    dispatcher.on('end', () => {
+        // The song has finished
+    });
+
+    dispatcher.on('error', e => {
+        // Catch any errors that may arise
+        console.log(e);
+    });
     message.channel.send(`:music: Đang phát: ${info.title}`);
 }
+exports.conf = {
+  enabled: false,
+  guildOnly: false,
+  userOnly: false,
+  aliases: ['cs'],
+  permLevel: 0
+};
+
+exports.help = {
+  name : "play",
+  description: "Chơi nhạc",
+  usage: "play [link ytb]"
+};

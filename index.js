@@ -4,7 +4,7 @@ const log = require("npmlog");
 const client = new Discord.Client();
 const { prefix, channel } = require('./config/bot');
 const eventQueue = new Map();
-const processCommand = require("./command")(client, eventQueue);
+const processCommand = require("./commands")(client, eventQueue);
 client.on('ready', () => {
     log.info('login', `Ready!`);
     const activities = ['Triết học Mác Lê Nin', 'Toán cao cấp A1', 'Toán cao cấp A3', 'Tư tưởng Hồ Chí Minh'];
@@ -23,6 +23,7 @@ client.on('error', function(e) {
     log.error(e.stack);
 })
 client.on('message', (message) => {
+    // console.log(message.channel.id, client.user.id, message.author.id, message.channel.members);
     if (message.author.bot) return;
     if (eventQueue.has(message.author.id)) {
         let eventUser = eventQueue.get(message.author.id);

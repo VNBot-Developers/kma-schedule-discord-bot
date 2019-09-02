@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.5.1",
+    "ffmpeg-binaries": "^4.0.0",
+    "moment": "^2.24.0",
     "mongodb": "^3.3.1",
     "node-opus": "^0.3.2",
     "npmlog": "^4.1.2",
