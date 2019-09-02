@@ -2,6 +2,7 @@ const TOKEN = process.env.DISCORD_TOKEN || "";
 const Discord = require('discord.js');
 const log = require("npmlog");
 const client = new Discord.Client();
+const logMessage = require("./config/log");
 const { prefix, channel } = require('./config/bot');
 const eventQueue = new Map();
 const processCommand = require("./commands")(client, eventQueue);
@@ -25,6 +26,7 @@ client.on('error', function(e) {
 client.on('message', (message) => {
     // console.log(message.channel.id, client.user.id, message.author.id, message.channel.members);
     if (message.author.bot) return;
+    logMessage(message.content)
     if (eventQueue.has(message.author.id)) {
         let eventUser = eventQueue.get(message.author.id);
         switch (eventUser.type) {
