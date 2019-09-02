@@ -30,7 +30,7 @@ exports.run = async function(client, message, args) {
 exports.conf = {
   enabled: false,
   guildOnly: false,
-  userOnly: false,
+  dmOnly: false,
   aliases: ['pl'],
   permLevel: 0
 };

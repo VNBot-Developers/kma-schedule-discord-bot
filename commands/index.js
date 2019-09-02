@@ -10,7 +10,10 @@ module.exports = function(client) {
         if (!client.commands.has(cmd)) return message.channel.send("Lệnh không hỗ trợ");
         const command = client.commands.get(cmd);
         try {
-            if(client.elevation(message) < command.conf.permLevel) return message.channel.send("Bạn không đủ quyền để thực hiện thao tác này")
+            if(client.elevation(message) < command.conf.permLevel) return message.channel.send("Bạn không đủ quyền để thực hiện thao tác này");
+            const channelType = message.channel.type;
+            if(command.conf.guildOnly && channelType !== "text") return message.channel.send("Chỉ hỗ trợ trong `guild text channel`.");
+            if(command.conf.dmOnly && channelType !== "dm") return message.channel.send("Chỉ hỗ trợ trong `dm text channel`.");
             return command.run(client, message, args);
         }
         catch (e) {

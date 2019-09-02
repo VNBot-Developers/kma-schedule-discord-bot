@@ -6,7 +6,7 @@ exports.run = function(client, message) {
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    userOnly: false,
+    dmOnly: false,
     aliases: ['rl'],
     permLevel: 3
 };

@@ -10,6 +10,7 @@ module.exports = function(client) {
         id: "493716447428608001"
     }
     client.elevation = function(message) {
+        if(message.channel.type != "text") return 1;
         const roles = message.guild.roles;
         const memberRoles = message.member.roles;
         const adminRole = roles.find(({ name }) => name == "ADMINISTRATOR");

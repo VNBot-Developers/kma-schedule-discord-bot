@@ -13,7 +13,7 @@ exports.run = function(client, message, args) {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  userOnly: true,
+  dmOnly: true,
   aliases: ['cs'],
   permLevel: 0
 };

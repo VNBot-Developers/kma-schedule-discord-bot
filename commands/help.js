@@ -28,12 +28,12 @@ exports.run = function(client, message, args) {
         .setThumbnail(client.user.avatarURL)
         .addField(command.help.name, `${command.help.description}`)
         .addField("Usage", `${client.prefix}${command.help.usage}`)
-    message.channel.send(helpEmbed)
+    message.author.send(helpEmbed)
 }
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    userOnly: false,
+    dmOnly: false,
     aliases: ['h'],
     permLevel: 0
 };
