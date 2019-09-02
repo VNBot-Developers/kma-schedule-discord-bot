@@ -1,5 +1,6 @@
-exports.run = function(client, message, args) {
-    require("../config/cmd")(client);
+exports.run = function(client, message) {
+    require("../config/command")(client);
+    require("../config/event")(client);
     message.channel.send(`Reload thành công!.`);
 }
 exports.conf = {

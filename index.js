@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const log = require("npmlog");
 const client = new Discord.Client();
 client.log = require("./config/log");
-require("./config/cmd")(client);
+require("./config/command")(client);
 require("./config/bot")(client);
 require("./config/event")(client);
 const processCommand = require("./commands")(client);
