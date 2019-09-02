@@ -1,23 +1,32 @@
 const path = require("path");
-const alias = new Object({
-    'ping': 'ping',
-    'help': 'help',
-    'reload': 'reload',
-    'play': 'music/play',
-    'login': 'schedule/login',
-})
-const commands = new Object();
-// Object.keys(alias).forEach(function(key) {
-//     const pathAlias = path.resolve(__dirname, `../commands/${alias[key]}.js`);
-//     alias[key] = pathAlias;
-//     commands[key] = require(pathAlias);
-// })
-for(key in alias){
-    const pathAlias = path.resolve(__dirname, `../commands/${alias[key]}.js`);
-    alias[key] = pathAlias;
-    commands[key] = require(pathAlias);
-}
-module.exports = {
-    alias,
-    commands
+const { Collection } = require("discord.js")
+const commands = [{
+    name: 'ping',
+    path: 'ping'
+},
+{
+    name: 'help',
+    path: 'help'
+},
+{
+    name: 'reload',
+    path: 'reload'
+},
+{
+    name: 'play',
+    path: 'music/play'
+},
+{
+    name: 'login',
+    path: 'schedule/login'
+},
+];
+module.exports = function(client) {
+
+    client.commands = new Collection();
+    commands.forEach(function(command) {
+        pathCommand = path.resolve(__dirname, `../commands/${command.path}.js`);
+        delete require.cache[pathCommand];
+        client.commands.set(command.name, require(pathCommand));
+    })
 }

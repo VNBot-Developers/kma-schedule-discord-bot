@@ -1,6 +1,6 @@
-exports.run = function(client, message, args, eventQueue) {
+exports.run = function(client, message, args) {
     const [email] = args;
-    eventQueue.set(message.author.id, {
+    client.events.set(message.author.id, {
         type: 'schedule:login',
         data: {
             email,

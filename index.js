@@ -2,10 +2,11 @@ const TOKEN = process.env.DISCORD_TOKEN || "";
 const Discord = require('discord.js');
 const log = require("npmlog");
 const client = new Discord.Client();
-const logMessage = require("./config/log");
-const { prefix, channel } = require('./config/bot');
-const eventQueue = new Map();
-const processCommand = require("./commands")(client, eventQueue);
+client.log = require("./config/log");
+require("./config/cmd")(client);
+require("./config/bot")(client);
+require("./config/event")(client);
+const processCommand = require("./commands")(client);
 client.on('ready', () => {
     log.info('login', `Ready!`);
     const activities = ['Triết học Mác Lê Nin', 'Toán cao cấp A1', 'Toán cao cấp A3', 'Tư tưởng Hồ Chí Minh'];
@@ -26,22 +27,22 @@ client.on('error', function(e) {
 client.on('message', (message) => {
     // console.log(message.channel.id, client.user.id, message.author.id, message.channel.members);
     if (message.author.bot) return;
-    logMessage(message.content)
-    if (eventQueue.has(message.author.id)) {
-        let eventUser = eventQueue.get(message.author.id);
+    client.log(message.content)
+    if (client.events.has(message.author.id)) {
+        let eventUser = client.events.get(message.author.id);
         switch (eventUser.type) {
             case "schedule:login": {
                 if (!eventUser.data.email) {
                     eventUser.data.email = message.content;
                     message.channel.send("Nhập password!");
-                    eventQueue.set(message.author.id, eventUser);
+                    client.events.set(message.author.id, eventUser);
                     return;
                 }
                 if (!eventUser.data.password) {
                     eventUser.data.password = message.content;
                     message.channel.send(`${eventUser.data.email} - ${eventUser.data.password}`);
                     message.delete();
-                    eventQueue.set(message.author.id, eventUser);
+                    client.events.set(message.author.id, eventUser);
                     return;
                 }
 
@@ -52,7 +53,7 @@ client.on('message', (message) => {
         }
 
     }
-    if (message.content.startsWith(prefix)) {
+    if (message.content.startsWith(client.prefix)) {
         return processCommand(message);
     }
 })

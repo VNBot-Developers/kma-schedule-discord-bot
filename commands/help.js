@@ -1,12 +1,12 @@
 const { RichEmbed } = require("discord.js")
-exports.run = function(client, message, args, commands, prefix) {
+exports.run = function(client, message, args) {
     if (args.length == 0) {
         const helpEmbed = new RichEmbed();
         helpEmbed
             .setColor("#993a9e")
             .setThumbnail(client.user.avatarURL);
         helpEmbed.addField("Help Command <:help:617956560613670922>",
-            `Hey, I'm ${client.user.username}, a vietnamese bot for utility, fun, gaming, images and music.\n My prefix is ${prefix} and here's my commands list.\nYou can do ${prefix}help <command name> to have informations about the command.\nYou can do ${prefix}help to receive the help command in the server.`)
+            `Hey, I'm ${client.user.username}, a vietnamese bot for utility, fun, gaming, images and music.\n My prefix is ${client.prefix} and here's my commands list.\nYou can do ${client.prefix}help <command name> to have informations about the command.\nYou can do ${client.prefix}help to receive the help command in the server.`)
             .addField('Available commands', '\u200B')
             .setFooter("Bot by Notekunn");
         helpEmbed.addField("Help", "`help`", true);
@@ -18,15 +18,16 @@ exports.run = function(client, message, args, commands, prefix) {
         return;
     }
     const cmd = args[0];
-    if (!commands.hasOwnProperty(cmd)) message.channel.send("Comment is not available");
-    const command = commands[cmd];
+    if (!client.commands.has(cmd)) return message.channel.send("Command is not available");
+    const command = client.commands.get(cmd);
+    console.log(command)
     const helpEmbed = new RichEmbed();
     helpEmbed
         .setColor("#993a9e")
         .setFooter("Bot by Notekunn")
         .setThumbnail(client.user.avatarURL)
         .addField(command.help.name, `${command.help.description}`)
-        .addField("Usage", `${prefix}${command.help.usage}`)
+        .addField("Usage", `${client.prefix}${command.help.usage}`)
     message.channel.send(helpEmbed)
 }
 exports.conf = {

@@ -1,11 +1,12 @@
-module.exports = {
-    prefix: "!",
-    name: "Schedule Bot",
-    channel: {
+module.exports = function(client) {
+    client.prefix = "!";
+    client.defaultChannel = {
         general: "604721235959611406",
         schedule: "615476097554841600",
-        test: "615481276270379021",
+        test: "615926386103812116",
         music_voice: "615590985300312109",
-    },
-    authorID: "493716447428608001",
+    };
+    client.owner = {
+        id: "493716447428608001"
+    }
 }
