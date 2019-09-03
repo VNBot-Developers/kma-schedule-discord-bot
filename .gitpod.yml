@@ -1,3 +1,4 @@
 vscode:
   extensions:
     - Equinusocio.vsc-material-theme@30.0.0:PskT49UZHjppd3FhLdFvtg==
+image: gitpod/workspace-mongodb
