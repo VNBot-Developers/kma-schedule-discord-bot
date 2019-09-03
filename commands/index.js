@@ -8,7 +8,8 @@ module.exports = function(client) {
         // console.log("Command: " + cmd);
         // console.log("Arguments: " + args);
         const command = client.commands.get(cmd) || client.commands.find(command => command.conf.aliases && command.conf.aliases.includes(cmd));
-        if (!command) return message.channel.send("Lệnh không hỗ trợ");
+        if (!command) return message.channel.send("Lệnh không hỗ trợ!");
+        if (!command.conf.enabled) return message.channel.send("Đang phát triển!");
         try {
             if (client.elevation(message) < command.conf.permLevel) return message.channel.send("Bạn không đủ quyền để thực hiện thao tác này");
             const channelType = message.channel.type;
