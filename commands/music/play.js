@@ -4,7 +4,7 @@ exports.run = async function(client, message, args) {
 
     if (!message.member.voiceChannel) return message.channel.send("Vui lòng kết nối với một kênh âm thanh.");
 
-    if (client.user.voiceChannel) return message.channel.send("Xin lỗi, bot đã kết nối với một kênh âm thanh khác.");
+    if (message.guild.me.voiceChannel) return message.channel.send("Xin lỗi, bot đã kết nối với một kênh âm thanh khác.");
 
     if (!args[0]) return message.channel.send("Xin lỗi, vui lòng nhập một url.");
 
@@ -19,16 +19,18 @@ exports.run = async function(client, message, args) {
     const dispatcher = connection.playStream(YTDL(args[0], { filter: "audioonly" }))
     dispatcher.on('end', () => {
         // The song has finished
+      
+        console.log("123");
     });
 
     dispatcher.on('error', e => {
         // Catch any errors that may arise
         console.log(e);
     });
-    message.channel.send(`:music: Đang phát: ${info.title}`);
+    message.channel.send(`🎵 Đang phát: ${info.title}`);
 }
 exports.conf = {
-  enabled: false,
+  enabled: true,
   guildOnly: false,
   dmOnly: false,
   aliases: ['pl'],

@@ -17,6 +17,10 @@ const commands = [{
     path: 'music/play'
 },
 {
+    name: 'leave',
+    path: 'music/leave'
+},
+{
     name: 'login',
     path: 'schedule/login'
 },

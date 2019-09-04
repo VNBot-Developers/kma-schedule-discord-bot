@@ -13,7 +13,7 @@ exports.run = function(client, message, args) {
         helpEmbed.addField("Normal", "`ping`", true);
         helpEmbed.addField("Administrator", "`reload`", true);
         helpEmbed.addField("Student", "`login`", true);
-        helpEmbed.addField("Music", "`play`", true);
+        helpEmbed.addField("Music", "`play`, `leave`", true);
         message.channel.send(helpEmbed)
         return;
     }
