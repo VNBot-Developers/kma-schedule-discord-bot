@@ -1,10 +1,18 @@
+const { Collection } = require("discord.js");
+function randomArray(arr){
+  return arr[Math.floor(Math.random()*arr.length)];
+}
 module.exports = function(client) {
     client.prefix = "!";
     client.defaultChannel = {
         general: "604721235959611406",
         schedule: "615476097554841600",
         test: "615926386103812116",
-        music_voice: "615590985300312109",
+        music: [
+          "619378852111581185",
+          "619378891311546380",
+          "619379101937041408"
+        ]
     };
     client.owner = {
         id: "493716447428608001"
@@ -23,4 +31,9 @@ module.exports = function(client) {
         if (botRole && memberRoles.has(botRole.id)) return 1;
         return 0;
     }
+    
+    client.music = new Collection();
+    
+    client.random = randomArray;
+  
 }
