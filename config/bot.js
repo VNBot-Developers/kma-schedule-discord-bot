@@ -3,7 +3,7 @@ function randomArray(arr){
   return arr[Math.floor(Math.random()*arr.length)];
 }
 module.exports = function(client) {
-    client.prefix = "!";
+    client.prefix = ">";
     client.defaultChannel = {
         general: "604721235959611406",
         schedule: "615476097554841600",
@@ -31,9 +31,9 @@ module.exports = function(client) {
         if (botRole && memberRoles.has(botRole.id)) return 1;
         return 0;
     }
-    
+
     client.music = new Collection();
-    
+
     client.random = randomArray;
-  
+
 }
