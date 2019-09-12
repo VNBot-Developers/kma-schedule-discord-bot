@@ -6,6 +6,10 @@ const UserSchema = new Schema({
     gender: String,
     avatarUrl: String,
     setting: String,
+    discordId: {
+        type: String,
+        unique: true
+    }
 })
 
 const User = mongoose.model('user', UserSchema);
