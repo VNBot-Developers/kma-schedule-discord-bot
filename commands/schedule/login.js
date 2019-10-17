@@ -1,20 +1,20 @@
 exports.run = function(client, message, args) {
-    const [email] = args;
+    const [studentCode] = args;
     client.events.set(message.author.id, {
         type: 'schedule:login',
         data: {
-            email,
+            studentCode,
             password: undefined,
         }
     });
-   if(!email) message.channel.send("Nhập tài khoản");
+   if(!studentCode) message.channel.send("Nhập tài khoản:");
    else message.channel.send("Nhập password!");
 }
 exports.conf = {
   enabled: true,
   guildOnly: false,
   dmOnly: true,
-  aliases: ['cs'],
+  aliases: [],
   permLevel: 0
 };
 

@@ -1,4 +1,5 @@
-const TOKEN = process.env.DISCORD_TOKEN || "";
+require('dotenv').config();
+const TOKEN = process.env.DISCORD_TOKEN;
 const Discord = require('discord.js');
 const log = require("npmlog");
 const client = new Discord.Client();
@@ -8,6 +9,20 @@ require("./config/bot")(client);
 require("./config/event")(client);
 const processCommand = require("./commands")(client);
 const processEvent = require("./events")(client);
+const mongoose = require("mongoose");
+const { DATABASE_STRING } = process.env;
+mongoose.connect(DATABASE_STRING, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+});
+mongoose.connection
+    .once('open', function() {
+        console.log("Connection database success!")
+    })
+    .on('error', function(error) {
+        console.log(error.stack);
+        process.exit(1);
+    })
 client.on('ready', () => {
     log.info('login', `Ready!`);
     const activities = ['Triết học Mác Lê Nin', 'Toán cao cấp A1', 'Toán cao cấp A3', 'Tư tưởng Hồ Chí Minh'];

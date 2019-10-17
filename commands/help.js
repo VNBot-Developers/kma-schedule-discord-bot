@@ -1,4 +1,4 @@
-const { RichEmbed } = require("discord.js")
+const { RichEmbed } = require("discord.js");
 exports.run = function(client, message, args) {
     if (args.length == 0) {
         const helpEmbed = new RichEmbed();

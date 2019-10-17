@@ -1,9 +1,16 @@
-function handler(client, message, email, password) {
-    message.channel.send(`Bạn đăng nhập với tài khoản ${email} mật khẩu ${password}`);
+const User = require("../models/user");
+async function handler(client, message, studentCode, password) {
+    // message.channel.send(`Bạn đăng nhập với tài khoản ${email} mật khẩu ${password}`);
+    const user = await User.findOneOrCreate({ discordId: message.author.id }, { displayName: message.author.tag });
+    const { information } = await user.login(studentCode, password);
+    const { name, className } = await JSON.parse(information);
+    message.channel.send("Bạn đang đăng nhập với tài khoản sv: " + name);
+
+
 }
-exports.run = function(client, message, _event) {
-    if (!_event.data.email) {
-        const email = message.content;
+exports.run = async function(client, message, _event) {
+    if (!_event.data.studentCode) {
+        const studentCode = message.content;
         message.channel.send("Nhập password!")
             .then(function() {
                 const filter = m => message.author.id === m.author.id;
@@ -23,11 +30,10 @@ exports.run = function(client, message, _event) {
         return;
     }
     if (!_event.data.password) {
-        const email = _event.data.email;
+        const studentCode = _event.data.studentCode;
         const password = message.content;
-        handler(client, message, email, password)
         client.events.delete(message.author.id);
-        return;
+        return await handler(client, message, studentCode, password);
     }
 
 }
