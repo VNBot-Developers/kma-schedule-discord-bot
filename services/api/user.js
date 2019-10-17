@@ -48,3 +48,16 @@ exports.download = function(bearerToken, drpSemester) {
     }
     return request(options);
 }
+exports.search = function(bearerToken, days = []) {
+    const options = {
+        url: `${HOST_API}/schedules/me/search`,
+        auth: {
+            bearer: bearerToken,
+        },
+        body: {
+            days
+        },
+        method: "POST",
+    }
+    return request(options);
+}

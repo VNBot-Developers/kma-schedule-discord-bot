@@ -43,7 +43,7 @@ client.on('error', function(e) {
 client.on('message', (message) => {
     // console.log(message.channel.id, client.user.id, message.author.id, message.channel.members);
     if (message.author.bot) return;
-    client.log(message.content)
+    client.log(message.toString())
     if (client.events.has(message.author.id)) return processEvent(message);
     if (message.content.startsWith(client.prefix)) return processCommand(message);
 

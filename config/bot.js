@@ -1,6 +1,6 @@
 const { Collection } = require("discord.js");
-function randomArray(arr){
-  return arr[Math.floor(Math.random()*arr.length)];
+function randomArray(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
 }
 module.exports = function(client) {
     client.prefix = ">";
@@ -9,16 +9,16 @@ module.exports = function(client) {
         schedule: "615476097554841600",
         test: "615926386103812116",
         music: [
-          "619378852111581185",
-          "619378891311546380",
-          "619379101937041408"
+            "619378852111581185",
+            "619378891311546380",
+            "619379101937041408"
         ]
     };
     client.owner = {
         id: "493716447428608001"
     }
     client.elevation = function(message) {
-        if(message.channel.type != "text") return 1;
+        if (message.channel.type != "text") return 1;
         const roles = message.guild.roles;
         const memberRoles = message.member.roles;
         const adminRole = roles.find(({ name }) => name == "ADMINISTRATOR");
@@ -35,5 +35,5 @@ module.exports = function(client) {
     client.music = new Collection();
 
     client.random = randomArray;
-
+    client.getEmoji = id => client.emojis.get(id).toString();
 }

@@ -41,6 +41,10 @@ UserSchema.methods.download = function(drpSemester) {
     const { token } = this;
     return UserApi.download(token, drpSemester);
 }
+UserSchema.methods.search = function(days) {
+    const { token } = this;
+    return UserApi.search(token, days);
+}
 UserSchema.statics.findOneOrCreate = async function(where, data) {
     const user = await User.findOne(where);
     if (user) return user;

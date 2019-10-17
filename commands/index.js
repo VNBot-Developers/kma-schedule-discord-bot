@@ -20,7 +20,7 @@ module.exports = function(client) {
             return command.run(client, message, args);
         }
         catch (e) {
-            message.channel.send(`Có lỗi xảy ra:\n${e.stack}`)
+            message.channel.send(`Có lỗi xảy ra:\n${e.stack}`);
             client.log(e.stack);
         }
     }
