@@ -33,12 +33,13 @@ UserSchema.methods.login = async function(studentCode, password) {
     return await self.save();
 }
 UserSchema.methods.showSemester = function() {
-    const {token} = this;
+    const { token } = this;
+    if (!token) return Promise.reject("Bạn chưa đăng nhập!");
     return UserApi.showSemester(token)
 }
 UserSchema.methods.download = function(drpSemester) {
-    const {token} = this;
-    return UserApi.showSemester(token)
+    const { token } = this;
+    return UserApi.download(token, drpSemester);
 }
 UserSchema.statics.findOneOrCreate = async function(where, data) {
     const user = await User.findOne(where);

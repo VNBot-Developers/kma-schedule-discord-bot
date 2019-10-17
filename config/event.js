@@ -4,6 +4,10 @@ const eventers = [{
     name: 'schedule:login',
     path: 'login'
 },
+{
+    name: 'schedule:download',
+    path: 'download'
+},
 ];
 module.exports = function(client) {
     client.events = new Collection();

@@ -1,14 +1,15 @@
 const Discord = require('discord.js');
 const User = require("../models/user");
 exports.run = async function(client, message, args) {
-    // console.log(message.guild.channels.size);
-    try {
-        const user = await User.findOneOrCreate({ discordId: message.author.id }, { displayName: message.author.tag });
-        console.log(user)
-    } catch (error) {
 
-        message.channel.send(`Có lỗi xảy ra: ${error}`);
-    }
+    const helpEmbed = new Discord.RichEmbed();
+    helpEmbed
+        .setColor("#993a9e")
+        .setFooter("Bot by Notekunn");
+
+    helpEmbed.addField("Chọn học kỳ:", "1 - Học kỳ 1\n2 - Học kỳ 2", true);
+
+    message.channel.send(helpEmbed)
 }
 exports.conf = {
     enabled: true,

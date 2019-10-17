@@ -27,10 +27,24 @@ exports.login = function(studentCode, password) {
 
 exports.showSemester = function(bearerToken) {
     const options = {
-        url: `${HOST_API}/schedules/semesters`,
+        url: `${HOST_API}/schedules/me/semesters`,
         auth: {
             bearer: bearerToken,
         },
         method: "GET",
     }
+    return request(options);
+}
+exports.download = function(bearerToken, drpSemester) {
+    const options = {
+        url: `${HOST_API}/schedules/me/save`,
+        auth: {
+            bearer: bearerToken,
+        },
+        form: {
+            drpSemester
+        },
+        method: "POST",
+    }
+    return request(options);
 }

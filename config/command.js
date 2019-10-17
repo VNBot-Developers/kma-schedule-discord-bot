@@ -25,6 +25,10 @@ const commands = [{
     path: 'schedule/login'
 },
 {
+    name: 'download',
+    path: 'schedule/download'
+},
+{
     name: 'test',
     path: 'test'
 },
