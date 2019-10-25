@@ -9,7 +9,7 @@ const groupBy = key => array =>
         return objectsByKeyValue;
     }, {});
 const groupByDay = groupBy('day');
-function sendSchedule(client, channel, schedules) {
+function sendSchedule(client, channel, schedules, user) {
     if (schedules.length == 0) return channel.send("Không có thời khóa biểu.");
     const timeTable = groupByDay(schedules);
     const embed = new RichEmbed();
@@ -17,6 +17,7 @@ function sendSchedule(client, channel, schedules) {
         .setColor("#993a9e")
         .setFooter("Bot by Notekunn")
         .setThumbnail(client.user.avatarURL);
+    embed.addField(`THỜI KHÓA BIỂU:`, `Mã sinh viên: ${user.studentCode}`, false);
     Object.keys(timeTable).forEach(dayString => {
         const day = moment(dayString).tz(TIME_ZONE);
         const msg = timeTable[dayString].map(e => `Tiết: ${e.lesson}\nMôn: ${e.className}\nGiáo viên: ${e.teacher}\nPhòng: ${e.room}`).join("\n\n");
@@ -24,7 +25,7 @@ function sendSchedule(client, channel, schedules) {
     })
     channel.send(embed);
 }
-exports.run = async function(client, message, args) {
+exports.run = async function (client, message, args) {
     const user = await User.findOneOrCreate({ discordId: message.author.id }, { displayName: message.author.tag });
     const [typeSearch] = args.splice(0, 1);
     const days = [];
@@ -44,7 +45,7 @@ exports.run = async function(client, message, args) {
         }
     }
     const { data: schedules } = await user.search(days);
-    sendSchedule(client, message.channel, schedules);
+    sendSchedule(client, message.channel, schedules, JSON.parse(user.information));
 }
 exports.conf = {
     enabled: true,
