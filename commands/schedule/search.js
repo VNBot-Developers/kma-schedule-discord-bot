@@ -17,7 +17,7 @@ function sendSchedule(client, channel, schedules, user) {
         .setColor("#993a9e")
         .setFooter("Bot by Notekunn")
         .setThumbnail(client.user.avatarURL);
-    embed.addField(`THỜI KHÓA BIỂU:`, `Mã sinh viên: ${user.studentCode}`, false);
+    embed.addField(`THỜI KHÓA BIỂU:`, `Sinh viên: ${user.name}, Mã sinh viên: ${user.studentCode}`, false);
     Object.keys(timeTable).forEach(dayString => {
         const day = moment(dayString).tz(TIME_ZONE);
         const msg = timeTable[dayString].map(e => `Tiết: ${e.lesson}\nMôn: ${e.className}\nGiáo viên: ${e.teacher}\nPhòng: ${e.room}`).join("\n\n");
