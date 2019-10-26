@@ -25,8 +25,13 @@ function sendSchedule(client, channel, schedules, user) {
     })
     channel.send(embed);
 }
-exports.run = async function (client, message, args) {
+exports.run = async function(client, message, args) {
     const user = await User.findOneOrCreate({ discordId: message.author.id }, { displayName: message.author.tag });
+    const isValidToken = await user.checkToken();
+    if (!isValidToken) {
+        message.channel.send(["Bạn chưa đăng nhập hoặc phiên đăng nhập hết hạn!", "Vui lòng đăng nhập lại!"]);
+        return;
+    }
     const [typeSearch] = args.splice(0, 1);
     const days = [];
     if (!typeSearch || !["day", "week"].includes(typeSearch)) days.push(moment.tz(TIME_ZONE).format(TIME_FORMAT));
@@ -44,6 +49,7 @@ exports.run = async function (client, message, args) {
             days.push(day.day(i).format(TIME_FORMAT));
         }
     }
+    client.log(`Search schedules: ${days}`);
     const { data: schedules } = await user.search(days);
     sendSchedule(client, message.channel, schedules, JSON.parse(user.information));
 }

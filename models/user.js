@@ -32,6 +32,18 @@ UserSchema.methods.login = async function(studentCode, password) {
     self.token = token;
     return await self.save();
 }
+UserSchema.methods.checkToken = async function() {
+    const { token } = this;
+    if(!token) return;
+    try {
+        await UserApi.checkToken(token);
+        return true;
+    } catch (error) {
+        this.token = null;
+        await this.save();
+        return false;
+    }
+}
 UserSchema.methods.showSemester = function() {
     const { token } = this;
     if (!token) return Promise.reject("Bạn chưa đăng nhập!");

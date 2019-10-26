@@ -24,7 +24,16 @@ exports.login = function(studentCode, password) {
     }
     return request(options);
 }
-
+exports.checkToken = function(bearerToken) {
+    const options = {
+        url: `${HOST_API}/users/me`,
+        auth: {
+            bearer: bearerToken,
+        },
+        method: "GET",
+    }
+    return request(options);
+}
 exports.showSemester = function(bearerToken) {
     const options = {
         url: `${HOST_API}/schedules/me/semesters`,

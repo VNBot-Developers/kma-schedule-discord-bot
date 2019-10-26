@@ -2,6 +2,11 @@ const User = require("../../models/user");
 const { RichEmbed } = require("discord.js");
 exports.run = async function(client, message, args) {
     const user = await User.findOneOrCreate({ discordId: message.author.id }, { displayName: message.author.tag });
+    const isValidToken = await user.checkToken();
+    if (!isValidToken) {
+        message.channel.send(["Bạn chưa đăng nhập hoặc phiên đăng nhập hết hạn!", "Vui lòng đăng nhập lại!"]);
+        return;
+    }
     const { data } = await user.showSemester();
     const semesters = data.splice(0, 5);
     client.events.set(message.author.id, {
