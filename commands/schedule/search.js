@@ -51,7 +51,7 @@ exports.run = async function(client, message, args) {
     }
     client.log(`Search schedules: ${days}`);
     const { data: schedules } = await user.search(days);
-    sendSchedule(client, message.channel, schedules, JSON.parse(user.information));
+    sendSchedule(client, message.channel, schedules, user.information);
 }
 exports.conf = {
     enabled: true,

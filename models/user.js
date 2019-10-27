@@ -13,28 +13,33 @@ const UserSchema = new Schema({
         required: true,
     },
     token: String,
-    information: String,
+    information: {
+        studentCode: String,
+        name: String,
+        className: String,
+        gender: String
+    },
 })
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
     if (!this.avatarUrl) this.avatarUrl = "https://cdn.discordapp.com/embed/avatars/0.png";
     if (!this.setting) this.setting = JSON.stringify({});
-    if (!this.information) this.information = JSON.stringify({});
+    if (!this.information) this.information = {};
     next();
 })
-UserSchema.methods.login = async function(studentCode, password) {
-    const { user, token } = await UserApi.register(studentCode, password)
+UserSchema.methods.login = async function (studentCode, password) {
+    const { user: { name, className, studentCode: _studentCode }, token } = await UserApi.register(studentCode, password)
         .catch(error => {
             if (error.statusCode === 409) return UserApi.login(studentCode, password);
             return Promise.reject(error);
         });
     const self = this;
-    self.information = JSON.stringify(user);
+    self.information = { name, className, studentCode: _studentCode };
     self.token = token;
     return await self.save();
 }
-UserSchema.methods.checkToken = async function() {
+UserSchema.methods.checkToken = async function () {
     const { token } = this;
-    if(!token) return;
+    if (!token) return;
     try {
         await UserApi.checkToken(token);
         return true;
@@ -44,20 +49,20 @@ UserSchema.methods.checkToken = async function() {
         return false;
     }
 }
-UserSchema.methods.showSemester = function() {
+UserSchema.methods.showSemester = function () {
     const { token } = this;
     if (!token) return Promise.reject("Bạn chưa đăng nhập!");
     return UserApi.showSemester(token)
 }
-UserSchema.methods.download = function(drpSemester) {
+UserSchema.methods.download = function (drpSemester) {
     const { token } = this;
     return UserApi.download(token, drpSemester);
 }
-UserSchema.methods.search = function(days) {
+UserSchema.methods.search = function (days) {
     const { token } = this;
     return UserApi.search(token, days);
 }
-UserSchema.statics.findOneOrCreate = async function(where, data) {
+UserSchema.statics.findOneOrCreate = async function (where, data) {
     const user = await User.findOne(where);
     if (user) return user;
     return await User.create({ ...where, ...data });
