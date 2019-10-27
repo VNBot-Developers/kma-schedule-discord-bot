@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "start": "node index",
-    "postinstall": "[ -f .env ] && echo \"Found .env file\" ||  (cp .env.example .env && echo \"Create .env success\")"
+    "preinstall": "[ -f .env ] && echo \"Found .env file\" ||  (cp .env.example .env && echo \"Create .env success\")"
   },
   "keywords": [],
   "author": "",
