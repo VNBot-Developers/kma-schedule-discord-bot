@@ -14,6 +14,7 @@ const { DATABASE_STRING } = process.env;
 mongoose.connect(DATABASE_STRING, {
     useNewUrlParser: true,
     useCreateIndex: true,
+    useUnifiedTopology: true,
 });
 mongoose.connection
     .once('open', function() {
