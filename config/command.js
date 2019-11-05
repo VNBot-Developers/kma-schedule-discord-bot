@@ -33,6 +33,10 @@ const commands = [{
     path: 'schedule/search'
 },
 {
+    name: 'notify',
+    path: 'schedule/notify'
+},
+{
     name: 'test',
     path: 'test'
 },

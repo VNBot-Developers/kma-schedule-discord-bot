@@ -57,7 +57,7 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     dmOnly: false,
-    aliases: [],
+    aliases: ['search'],
     permLevel: 0
 };
 
