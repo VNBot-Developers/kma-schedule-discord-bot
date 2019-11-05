@@ -15,6 +15,7 @@ mongoose.connect(DATABASE_STRING, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
 });
 mongoose.connection
     .once('open', function() {

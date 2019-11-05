@@ -1,5 +1,5 @@
-module.exports = function(client) {
-    return async function(message) {
+module.exports = function (client) {
+    return async function (message) {
         const _event = client.events.get(message.author.id);
         if (client.eventers.has(_event.type)) {
             try {

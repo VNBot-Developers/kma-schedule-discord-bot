@@ -64,8 +64,9 @@ UserSchema.methods.search = function (days) {
 }
 UserSchema.statics.findOneOrCreate = async function (where, data) {
     const user = await User.findOne(where);
-    if (user) return user;
-    return await User.create({ ...where, ...data });
+    if (!user) return await User.create({ ...where, ...data });
+    return await User.findOneAndUpdate(where, data);
+
 }
 const User = mongoose.model('user', UserSchema);
 

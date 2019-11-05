@@ -13,7 +13,7 @@ module.exports = function(client) {
         try {
             if (client.elevation(message) < command.conf.permLevel) return message.channel.send("Bạn không đủ quyền để thực hiện thao tác này");
             const channelType = message.channel.type;
-            if (command.conf.guildOnly && channelType !== "text") return message.channel.send("Chỉ hỗ trợ trong `guild text channel`.");
+            if (command.conf.guildOnly && channelType !== "text") return message.channel.send("Chỉ hỗ trợ trong `guild text channel`(Tin nhắn chung).");
             if (command.conf.dmOnly && channelType !== "dm") return message.channel.send("Chỉ hỗ trợ trong `dm text channel`(Tin nhắn riêng).");
             const isAsync = command.run.constructor.name === "AsyncFunction";
             if (isAsync) return await command.run(client, message, args);
