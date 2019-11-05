@@ -9,6 +9,7 @@ module.exports = function(client) {
                 return eventFunction.run(client, message, _event)
             }
             catch (e) {
+                message.channel.send(`Có lỗi xảy ra: ${e.message}`);
                 client.log(e.stack);
             }
         }

@@ -1,10 +1,15 @@
 const User = require("../models/user");
+const getProp = require("lodash/get");
 async function handler(client, message, studentCode, password) {
     // message.channel.send(`Bạn đăng nhập với tài khoản ${email} mật khẩu ${password}`);
     const user = await User.findOneOrCreate({ discordId: message.author.id }, { displayName: message.author.tag });
-    const { information } = await user.login(studentCode, password);
-    message.channel.send(`Bạn đang đăng nhập với tài khoản sv: ${information.name}(${studentCode})`);
+    try {
 
+        const { information } = await user.login(studentCode, password);
+        message.channel.send(`Bạn đang đăng nhập với tài khoản sv: ${information.name}(${studentCode})`);
+    } catch (error) {
+        return Promise.reject(Error(getProp(error, 'error.error.message', 'Đăng nhập thất bại')))
+    }
 
 }
 exports.run = async function (client, message, _event) {
