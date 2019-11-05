@@ -23,9 +23,7 @@
     "npmlog": "^4.1.2",
     "parse-schedule-kma": "^1.1.1",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
-    "sequelize": "^5.16.0",
-    "sqlite3": "^4.1.0"
+    "request-promise": "^4.2.4"
   },
   "devDependencies": {
     "ytdl-core": "^1.0.0"
