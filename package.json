@@ -17,7 +17,7 @@
     "ffmpeg": "0.0.4",
     "lodash": "^4.17.20",
     "mocha": "^6.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "moment-timezone": "^0.5.27",
     "mongoose": "^5.7.7",
     "npmlog": "^4.1.2",
