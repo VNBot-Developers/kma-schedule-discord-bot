@@ -16,7 +16,7 @@
     "dotenv": "^8.1.0",
     "ffmpeg": "0.0.4",
     "lodash": "^4.17.20",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
     "mongoose": "^5.7.7",
